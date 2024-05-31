@@ -30,6 +30,22 @@ app.get('/api/quotes', (req, res) => {
     // res.send({quotes});
 })
 
+app.post('/api/quotes', (req, res) => {
+    const { quote, person } = req.query;
+    if (!quote, !person) {
+        res.status(400).send('Must include a quote and a person');
+    } else {
+        const newQuote = {
+            quote,
+            person
+        }
+        quotes.push(newQuote);
+        res.status(201).send({
+            quote: newQuote
+        });
+    }
+})
+
 app.listen(PORT, ()=> {
     console.log(`Server listening on port ${PORT}`);
 })
