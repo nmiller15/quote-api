@@ -16,6 +16,20 @@ app.get('/api/quotes/random', (req, res) => {
     res.status(200).send(response);
 })
 
+app.get('/api/quotes', (req, res) => {
+    if (!req.query.person) {
+        res.send({ quotes }) 
+    } else {
+        let person = req.query.person;
+        let results = quotes.filter((quote) => { 
+            const isEqual = quote.person === person
+            return isEqual;
+        });    
+        res.send({ quotes: results });
+    }
+    // res.send({quotes});
+})
+
 app.listen(PORT, ()=> {
     console.log(`Server listening on port ${PORT}`);
 })
